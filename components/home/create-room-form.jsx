@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { createRoom } from '@/lib/mock-backend'
+import { roomService } from '@/lib/services/room-service'
 import { getSessionId, getStoredName, setStoredName } from '@/lib/identity'
 import { Loader2 } from 'lucide-react'
 
@@ -42,7 +42,7 @@ export function CreateRoomForm() {
     setLoading(true)
     const displayName = name.trim() || 'Interviewer'
     setStoredName(displayName)
-    const res = await createRoom({
+    const res = await roomService.createRoom({
       problem,
       language,
       starterCode: starter,

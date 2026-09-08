@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { getRoom } from '@/lib/mock-backend'
+import { roomService } from '@/lib/services/room-service'
 import { setStoredName } from '@/lib/identity'
 import { Loader2 } from 'lucide-react'
 
@@ -20,7 +20,7 @@ export function JoinRoomForm() {
     if (!trimmed) return
     setLoading(true)
     setError('')
-    const res = await getRoom(trimmed)
+    const res = await roomService.getRoom(trimmed)
     if (!res.ok) {
       setError('No room found with that code.')
       setLoading(false)
